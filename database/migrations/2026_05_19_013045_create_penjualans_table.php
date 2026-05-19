@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penjualans', function (Blueprint $table) {
-            $table->id();
+             $table->id();
+            $table->string('kode_transaksi')->unique();
+            $table->foreignId('barang_id')->constrained('barangs')->onDelete('cascade');
+            $table->foreignId('kasir_id')->constrained('kasirs')->onDelete('cascade');
+            $table->integer('jumlah');
+            $table->decimal('subtotal', 12, 2);
+            $table->foreignId('diskon_id')->nullable()->constrained('diskons')->nullOnDelete();
+            $table->decimal('total', 12, 2);
+            $table->timestamp('tanggal')->useCurrent();
             $table->timestamps();
         });
     }

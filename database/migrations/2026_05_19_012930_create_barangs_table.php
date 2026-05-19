@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('barangs', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_barang');
+            $table->foreignId('kategori_barang_id')->constrained('kategori_barangs')->onDelete('cascade');
+            $table->decimal('harga_beli', 12, 2);
+            $table->decimal('harga_jual', 12, 2);
+            $table->integer('stok');
+            $table->string('satuan')->nullable();
             $table->timestamps();
         });
     }

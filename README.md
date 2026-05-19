@@ -1,59 +1,202 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# POS Cloud Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Point of Sale (POS) berbasis Laravel untuk manajemen barang, kategori, diskon, kasir, dan transaksi penjualan.
 
-## About Laravel
+## Fitur
+- Manajemen Kategori Barang
+- Manajemen Barang
+- Manajemen Diskon
+- Manajemen Kasir
+- Manajemen Penjualan
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
+- PHP 8.2.x
+- Laravel 13
+- MySQL / MariaDB
+- Composer
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Clone Project
+Clone repository:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/Rivan012/pos_cloud.git
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Masuk ke folder project:
 
-## Contributing
+```bash
+cd pos_cloud
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Install Dependency
+Install package Laravel:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+composer install
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Environment Setup
+Copy file environment:
+
+```bash
+cp .env.example .env
+```
+
+Jika di Windows CMD:
+
+```cmd
+copy .env.example .env
+```
+
+Jika PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## Database Configuration
+Edit file `.env`
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=pos_cloud
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Buat database MySQL:
+
+```sql
+CREATE DATABASE pos_cloud;
+```
+
+---
+
+## Run Migration
+Jalankan migration:
+
+```bash
+php artisan migrate
+```
+
+Jika ingin reset database:
+
+```bash
+php artisan migrate:fresh
+```
+
+Jika menggunakan seeder:
+
+```bash
+php artisan db:seed
+```
+
+Atau:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
+
+## Run Project
+Menjalankan server Laravel:
+
+```bash
+php artisan serve
+```
+
+Akses di browser:
+
+```bash
+http://127.0.0.1:8000
+```
+
+---
+
+## Folder Structure
+```bash
+app/
+ ├── Models/
+ ├── Http/
+ │    ├── Controllers/
+database/
+ ├── migrations/
+ ├── seeders/
+routes/
+ ├── web.php
+ ├── api.php
+```
+
+---
+
+## Common Errors
+
+### Foreign key constraint incorrectly formed
+Jika muncul error seperti:
+
+```bash
+SQLSTATE[HY000]: General error: 1005
+```
+
+Biasanya karena nama tabel foreign key tidak sesuai.
+
+Solusi:
+
+```bash
+php artisan migrate:fresh
+```
+
+Pastikan naming migration sesuai Laravel convention:
+
+- users
+- barangs
+- diskons
+- kasirs
+- penjualans
+- kategori_barangs
+
+---
+
+### Composer not found
+Install Composer terlebih dahulu:
+
+https://getcomposer.org/
+
+---
+
+### PHP version error
+Cek versi PHP:
+
+```bash
+php -v
+```
+
+Minimal sesuai requirement Laravel.
+
+---
+
+## Author
+Rivan Alfatoni
+
+---
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# pos_cloud
+Open-source for educational purposes.
