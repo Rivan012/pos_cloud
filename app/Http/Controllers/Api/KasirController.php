@@ -10,6 +10,7 @@ class KasirController extends Controller
 {
     public function index()
     {
+        // return response()->json(Kasir::all());
         return response()->json(
             Kasir::with('user')->get()
         );
